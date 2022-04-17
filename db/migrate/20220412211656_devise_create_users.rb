@@ -5,7 +5,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
     enable_extension("citext")
     create_table :users do |t|
       ## Database authenticatable
-      t.string :email,              null: false, default: ""
+      t.citext :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
@@ -37,7 +37,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.citext :username
       t.boolean :private
       t.integer :likes_count, default: 0
-      t.integer :comments_count
+      t.integer :comments_count, default: 0
 
       t.timestamps null: false
     end
