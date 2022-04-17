@@ -22,4 +22,11 @@
 class FollowRequest < ApplicationRecord
   belongs_to :recipient, class_name: "User", foreign_key: "recipient_id"
   belongs_to :sender, class_name: "User", foreign_key: "sender_id"
+
+  enum status: { pending: "pending", rejected: "rejected", accepted: "accepted" }
+  #when you use enums these scopes (below) automatically get defined for us
+  # scope :accepted, -> { where(status: "accepted") }
+  # scope :accepted, -> { where.not(status: "accepted") }
+
+
 end
