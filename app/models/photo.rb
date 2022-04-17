@@ -30,4 +30,8 @@ class Photo < ApplicationRecord
   # like.rb >> belongs_to :fan, class_name: "User", counter_cache: true
   has_many :fans, through: :likes, source: :fan
 
+  validates :caption, presence: true
+
+  validates :image, presence: true
+
 end
