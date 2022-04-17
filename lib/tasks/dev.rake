@@ -3,7 +3,25 @@ task sample_data: :environment do
 
   if Rails.env.development?
     FollowRequest.destroy_all
+    Comment.delete_all
+    Like.delete_all
+    Photo.delete_all
     User.destroy_all
+  end
+
+  #-- creating user I can signup as for testing purposes --
+
+  usernames = Array.new { Faker::Name.first_name }
+  usernames << "Alice"
+  usernames << "Bob"
+
+  usernames.each do |username|
+    User.create(
+      email: "#{username}@example.com",
+      password: "password",
+      username: username.downcase,
+      private: [true, false].sample
+    )
   end
 
   # --- creating users ---
