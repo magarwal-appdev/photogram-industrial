@@ -1,0 +1,41 @@
+# == Schema Information
+#
+# Table name: photos
+#
+#  id             :bigint           not null, primary key
+#  caption        :text
+#  comments_count :integer          default(0)
+#  image          :string
+#  likes_count    :integer          default(0)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  owner_id       :bigint           not null
+#
+# Indexes
+#
+#  index_photos_on_owner_id  (owner_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (owner_id => users.id)
+#
+class Photo < ApplicationRecord
+  belongs_to :owner, class_name: "User", counter_cache: true
+  # has_many :comments, class_name: "Comment", foreign_key: "photo_id"
+  has_many :comments
+
+  has_many :likes, class_name: "Like", foreign_key: "photo_id"
+
+  # Fans: For a photo, retrieving the users who have liked it.
+  # like.rb >> belongs_to :fan, class_name: "User", counter_cache: true
+  has_many :fans, through: :likes, source: :fan
+
+  validates :caption, presence: true
+
+  validates :image, presence: true
+
+  scope :past_week, -> { where(created_at: 1.week.ago...) }
+
+  scope :by_likes, -> { order(likes_count: :desc) }
+
+end
