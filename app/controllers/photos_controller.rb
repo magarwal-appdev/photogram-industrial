@@ -61,6 +61,14 @@ class PhotosController < ApplicationController
     @user = User.find_by!(username: params.fetch(:username))
   end
 
+  def feed
+    @user_photos = current_user.feed
+  end
+
+  def discover
+    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_photo
