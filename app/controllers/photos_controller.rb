@@ -66,7 +66,7 @@ class PhotosController < ApplicationController
   end
 
   def discover
-    
+    @leader_photos = current_user.discover
   end
 
   private
