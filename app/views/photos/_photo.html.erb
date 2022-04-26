@@ -2,14 +2,14 @@
   <div class="col-md-6 offset-md-3">
 
     <div class="card">
-      <%= image_tag giraffe.image, class: "card-img-top" %>
+      <%= image_tag photo.image, class: "card-img-top" %>
       <div class="card-body">
-        <h5 class="card-title"><%= giraffe.owner.username %></h5>
-        <p class="card-text"><%= giraffe.caption %></p>
+        <h5 class="card-title"><%= photo.owner.username %></h5>
+        <p class="card-text"><%= photo.caption %></p>
       </div>
 
       <ul class="list-group list-group-flush">
-        <% giraffe.comments.each do |comment| %>
+        <% photo.comments.each do |comment| %>
           <li class="list-group-item">
             <div class="media">
               <img src="..." class="mr-3" alt="...">
@@ -23,7 +23,7 @@
       </ul>
 
       <div class="card-body">
-        <%= render "comments/form", comment: Comment.new(photo_id: giraffe.id) %>
+        <%= render "comments/form", comment: Comment.new(photo_id: photo.id) %>
         <%#= render "comments/form", comment: photo.comments.build %>
 
       </div>

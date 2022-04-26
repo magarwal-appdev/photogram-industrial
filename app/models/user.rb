@@ -41,6 +41,8 @@ class User < ApplicationRecord
 
   has_many :accepted_received_follow_requests, -> { accepted }, foreign_key: :recipient_id , class_name: "FollowRequest"
 
+  has_many :pending_received_follow_requests, -> { pending }, foreign_key: :recipient_id, class_name: "FollowRequest"
+  
   has_many :likes, foreign_key: :fan_id
 
   # Inverse of Fans: All liked photos of a user
@@ -52,6 +54,8 @@ class User < ApplicationRecord
 
   has_many :followers, through: :accepted_received_follow_requests, source: :sender
 
+  has_many :pending, through: :pending_received_follow_requests, source: :sender
+
   # Feed: For a user, get photos owned by users that they follow
   has_many :feed, through: :leaders, source: :own_photos 
 
@@ -59,5 +63,6 @@ class User < ApplicationRecord
   has_many :discover, through: :leaders, source: :liked_photos
 
   validates :username, presence: true, uniqueness: true
+
 
 end

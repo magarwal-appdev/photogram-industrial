@@ -20,5 +20,8 @@ Rails.application.routes.draw do
 
   get "/:username" => "users#show", as: :user
 
+  get ":username/feed" => "users#feed", as: :feed
+
+  get ":username/liked" => "users#liked", as: :liked
   
 end
